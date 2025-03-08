@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 8/3 - Premium Edition</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ff0040, #ff66b2);
+            flex-direction: column;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .gift-container {
+            position: relative;
+            cursor: pointer;
+            animation: shake 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes shake {
+            0% { transform: rotate(-3deg); }
+            100% { transform: rotate(3deg); }
+        }
+        .gift-box {
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, pink, #ff99cc);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 28px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+        .gift-box:hover {
+            transform: scale(1.2);
+        }
+        .floating-item {
+            position: absolute;
+            font-size: 50px;
+            animation: floatUp 6s infinite linear;
+            opacity: 0.8;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        .message {
+            display: none;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out, swing 2s infinite alternate;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes swing {
+            0% { transform: translateX(-50%) rotate(-5deg); }
+            100% { transform: translateX(-50%) rotate(5deg); }
+        }
+        .big-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 150px;
+            color: #ff0000;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+            animation: heartbeat 1.5s infinite;
+            display: none;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    </audio>
+    <div class="gift-container" onclick="openGift()">
+        <div class="gift-box">🎁</div>
+    </div>
+    <div class="big-heart">❤️</div>
+    <div class="message">Chúc mừng 8/3 ăng ghe lờ của nợn, chúc pék ngày càng xink đẹp, càng nhận nhiều thứ tốt đẹp hơn và yêu nợn nhiều hưn! yêu emmm💖</div>
+    
+    <script>
+        function openGift() {
+            document.querySelector('.gift-container').classList.add('open');
+            document.querySelector('.gift-box').style.display = 'none';
+            document.querySelector('.message').style.display = 'block';
+            document.querySelector('.big-heart').style.display = 'block';
+            document.getElementById("bg-music").play();
+            generateFloatingItems();
+        }
+        
+        function generateFloatingItems() {
+            const symbols = ['❤️', '💍', '🌹', '✨', '🎀'];
+            setInterval(() => {
+                let item = document.createElement('div');
+                item.classList.add('floating-item');
+                item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.animationDuration = Math.random() * 4 + 3 + 's';
+                document.body.appendChild(item);
+                setTimeout(() => item.remove(), 6000);
+            }, 400);
+        }
+    </script>
+</body>
+</html>
